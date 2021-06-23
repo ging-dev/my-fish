@@ -28,29 +28,6 @@ end
 function fish_default_mode_prompt -d 'Display the default mode for the prompt'
 end
 
-function _block_default_mode -d 'Returns the default mode for the prompt'
-    set block
-    # Check if in vi mode
-    if test "$fish_key_bindings" = 'fish_vi_key_bindings'
-        or test "$fish_key_bindings" = 'fish_hybrid_key_bindings'
-        switch $fish_bind_mode
-            case default
-                set block (set_color -b brred -o black)' N '
-            case insert
-                set block (set_color -b brgreen -o black)' I '
-            case replace_one
-                set block (set_color -b brgreen -o black)' R '
-            case replace
-                set block (set_color -b brcyan -o black)' R '
-            case visual
-                set block (set_color -b brmagenta -o black)' V '
-        end
-    end
-
-    echo $block
-end
-
-
 # Private mode block
 function _block_private -d 'Returns private mode block'
     if not test -z $fish_private_mode
@@ -64,7 +41,7 @@ end
 
 # Right-hand prompt
 function fish_right_prompt -d 'Right-hand prompt'
-    set block (_block_status)(_block_git)(_block_time_stamp)(_block_default_mode)(_block_private)(set_color normal)
+    set block (_block_status)(_block_git)(_block_time_stamp)(_block_private)(set_color normal)
 
     if [ $TERM = 'linux' ]
         set block

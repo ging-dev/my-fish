@@ -46,35 +46,9 @@ function _block_icon -d 'Returns icon block'
     echo (set_color -b blue white) (_fishblocks_os_icon)' '
 end
 
-# SSH block
-function _block_ssh -d 'Returns SSH block'
-    set block
-    if set -q SSH_TTY
-        set block (set_color -b bryellow -o black)' SSH '
-    end
-
-    echo $block
-end
-
 # user@host block
 function _block_user_host -d 'Returns username and hostname block'
-    set -l user_hostname $USER #@(prompt_hostname)
-
-    if [ $USER = 'root' ]
-        set user_bg red
-    else if [ $USER != (logname) ]
-        set user_bg yellow
-    else
-        set user_bg brwhite
-    end
-
-    # If we're running via SSH.
-    if set -q SSH_TTY
-        set user_bg brblack
-        set user_hostname (set_color -o brblue)$USER(set_color -o brred)@(set_color -o brgreen)(prompt_hostname)
-    end
-
-    echo (set_color -b $user_bg -o black) \uf2bd $user_hostname' '
+    echo (set_color -b brwhite -o black) \uf2bd $USER' '
 end
 
 # PWD block
@@ -99,5 +73,5 @@ function fish_prompt
     end
 
     # Print right-hand prompt
-    echo (_block_icon)(_block_ssh)(_block_user_host)(_block_pwd)(set_color normal)' '
+    echo (_block_icon)(_block_user_host)(_block_pwd)(set_color normal)' '
 end
