@@ -7,13 +7,13 @@ end
 
 # Is git has untracked files?
 function _fishblocks_git_untracked -d 'Checks whether or not the current repository has untracked files'
-    command git ls-files --others --exclude-standard --directory --no-empty-directory --error-unmatch -- :/ >/dev/null 2>&1 &&
-        echo 0
+    command git ls-files --others --exclude-standard --directory --no-empty-directory --error-unmatch -- :/ >/dev/null 2>&1 && echo 0
 end
 
 # Is PWD a git directory?
 function _fishblocks_git_directory -d 'Checks whether or not the current directory is a or part of a git repository'
     set -l repo_info (command git rev-parse --git-dir --is-inside-git-dir --is-bare-repository --is-inside-work-tree HEAD 2>/dev/null)
+
     echo $repo_info
 end
 
@@ -30,6 +30,7 @@ function _fishblocks_git_status -d 'Returns color based on the previous command 
     else
         set git_color white
     end
+
     echo $git_color
 end
 
@@ -42,8 +43,7 @@ end
 
 # Distro/OS icon block
 function _block_icon -d 'Returns icon block'
-    set block (set_color -b blue white) (_fishblocks_os_icon)' '
-    echo $block
+    echo (set_color -b blue white) (_fishblocks_os_icon)' '
 end
 
 # SSH block
@@ -52,6 +52,7 @@ function _block_ssh -d 'Returns SSH block'
     if set -q SSH_TTY
         set block (set_color -b bryellow -o black)' SSH '
     end
+
     echo $block
 end
 
@@ -73,8 +74,7 @@ function _block_user_host -d 'Returns username and hostname block'
         set user_hostname (set_color -o brblue)$USER(set_color -o brred)@(set_color -o brgreen)(prompt_hostname)
     end
 
-    set block (set_color -b $user_bg -o black) \uf2bd $user_hostname' '
-    echo $block
+    echo (set_color -b $user_bg -o black) \uf2bd $user_hostname' '
 end
 
 # PWD block
@@ -85,8 +85,8 @@ function _block_pwd -d 'Returns PWD block'
     else
         set pwd_color red
     end
-    set block (set_color -b yellow -o $pwd_color) \uf07c (prompt_pwd)' '
-    echo $block
+
+    echo (set_color -b yellow -o $pwd_color) \uf115 (prompt_pwd)' '
 end
 
 # Left-hand prompt

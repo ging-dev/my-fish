@@ -2,30 +2,26 @@
 
 # Time stamp block
 function _block_time_stamp -d 'Returns time stamp block'
-    set block (set_color -b brcyan -o black)' '(date +%H:%M:%S)' '
-    echo $block
+    echo (set_color -b brcyan -o black)' '(date +%H:%M:%S)' '
 end
 
 # Status block
 function _block_status -d 'Returns status block'
     if not test $status -eq 0
-        set block (set_color -b red yellow)' ✘ '
+        echo (set_color -b red yellow)' ✘ '
     else
-        set block (set_color -b brgreen green)' ✔ '
+        echo (set_color -b brgreen green)' ✔ '
     end
-    echo $block
 end
 
 # Git block
 function _block_git -d 'Returns Git block'
+    set block
     if [ (fish_git_prompt) ]
-        set git_bg (_fishblocks_git_status)
-        set block \uf418(fish_git_prompt)'  '
-    else
-        set git_bg normal
-        set block (fish_git_prompt)
+        set block (set_color -b (_fishblocks_git_status) -o white) \uf418(fish_git_prompt)'  '
     end
-    echo (set_color -b $git_bg -o white) $block
+
+    echo $block
 end
 
 # Override fish_default_mode_prompt and use the theme's custom prompt
@@ -50,17 +46,19 @@ function _block_default_mode -d 'Returns the default mode for the prompt'
                 set block (set_color -b brmagenta -o black)' V '
         end
     end
+
     echo $block
 end
 
 
 # Private mode block
 function _block_private -d 'Returns private mode block'
-    if  not test -z $fish_private_mode
+    if not test -z $fish_private_mode
         set block (set_color -b black white) \ufaf8
     else
         set block
     end
+
     echo $block
 end
 
