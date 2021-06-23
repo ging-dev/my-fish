@@ -7,10 +7,10 @@ end
 
 # Status block
 function _block_status -d 'Returns status block'
-    if not test $status -eq 0
-        echo (set_color -b red yellow)' ✘ '
-    else
+    if test $status -eq 0
         echo (set_color -b brgreen green)' ✔ '
+    else
+        echo (set_color -b red yellow)' ✘ '
     end
 end
 
@@ -64,9 +64,11 @@ end
 
 # Right-hand prompt
 function fish_right_prompt -d 'Right-hand prompt'
+    set block (_block_status)(_block_git)(_block_time_stamp)(_block_default_mode)(_block_private)(set_color normal)
+
     if [ $TERM = 'linux' ]
-        return
+        set block
     end
 
-    echo -ne (_block_status)(_block_git)(_block_time_stamp)(_block_default_mode)(_block_private)(set_color normal)
+    echo $block
 end
