@@ -2,7 +2,7 @@
 
 # Time stamp block
 function _block_time_stamp -d 'Returns time stamp block'
-    echo (set_color -b brcyan -o black)' '(date +%H:%M:%S)' '
+    echo (set_color -b cyan -o brcyan) \uf017 (date +%H:%M:%S)' '
 end
 
 # Status block
@@ -22,10 +22,6 @@ function _block_git -d 'Returns Git block'
     end
 
     echo $block
-end
-
-# Override fish_default_mode_prompt and use the theme's custom prompt
-function fish_default_mode_prompt -d 'Display the default mode for the prompt'
 end
 
 # Private mode block
