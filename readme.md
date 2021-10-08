@@ -1,5 +1,5 @@
 ## My Fish Shell Theme
-![](https://imgur.com/UlHv0r1.png)
+![](https://i.imgur.com/3RtwBbT.png)
 
 Extract to `.config/fish`
 

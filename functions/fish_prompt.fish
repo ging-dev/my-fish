@@ -48,7 +48,7 @@ end
 
 # user@host block
 function _block_user_host -d 'Returns username and hostname block'
-    echo (set_color -b brwhite -o black) \uf2bd $USER' '
+    echo (set_color -b white -o black) \uf2bd $USER' '
 end
 
 # PWD block
